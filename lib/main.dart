@@ -1,6 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
 
@@ -37,26 +44,31 @@ class HomeStart extends State<Home> {
               ),
               Padding(
                 padding: EdgeInsets.all(10),
-             child: TextField(
-               decoration: InputDecoration(
-                 border: OutlineInputBorder(
-                   borderRadius: BorderRadius.circular(10)
-                 ),
-                 labelText: 'Email Usuario',
-                 hintText: 'Digite email de usuario '
-               ),
-             ),
+                child: TextField(
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      labelText: 'Email Usuario',
+                      hintText: 'Digite email de usuario '),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
+                          borderRadius: BorderRadius.circular(10)),
                       labelText: 'Password Usuario',
-                      hintText: 'Digite password de usuario '
-                  ),
+                      hintText: 'Digite password de usuario '),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    print('botón presionado');
+                  },
+                  child: Text('Enviar'),
                 ),
               )
             ],
