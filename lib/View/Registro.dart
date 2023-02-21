@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class Registro extends StatefulWidget {
   @override
@@ -6,6 +8,29 @@ class Registro extends StatefulWidget {
 }
 
 class RegistroApp extends State<Registro> {
+  TextEditingController nombre =TextEditingController();
+  TextEditingController identidad=TextEditingController();
+  TextEditingController correo=TextEditingController();
+  TextEditingController telefono=TextEditingController();
+
+  final firebase= FirebaseFirestore.instance;
+
+  insertarDatos() async{
+    try{
+      await firebase.collection('Usuarios').doc().set({
+        "NombreUsuario":nombre.text,
+        "IndentidadUsuario":identidad.text,
+        "CorreoUsuario":correo.text,
+        "TelefonoUsuario":telefono.text
+      });
+      print('Envio Correcto');
+    }
+    catch(e){
+      print('Error en insert....... '+ e.toString());
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +43,7 @@ class RegistroApp extends State<Registro> {
           children: [
             Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
             child: TextField(
+              controller: nombre,
               decoration: InputDecoration(
                 labelText: 'Nombre'
               ),
@@ -28,6 +54,7 @@ class RegistroApp extends State<Registro> {
             ),
             Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
               child: TextField(
+                controller: identidad,
                 decoration: InputDecoration(
                     labelText: 'Identificación'
                 ),
@@ -38,7 +65,7 @@ class RegistroApp extends State<Registro> {
             ),
             Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
               child: TextField(
-
+                controller: correo,
                 decoration: InputDecoration(
                     labelText: 'Correo'
                 ),
@@ -49,6 +76,7 @@ class RegistroApp extends State<Registro> {
             ),
             Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
               child: TextField(
+                controller: telefono,
                 decoration: InputDecoration(
                     labelText: 'Teléfono'
                 ),
@@ -61,7 +89,8 @@ class RegistroApp extends State<Registro> {
               padding: EdgeInsets.only(top: 20, left: 10, right: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  print('botón presionado');
+                  print(nombre.text);
+                  correo.text='Botón presionado';
                 },
                 child: Text('Registrar'),
               ),
