@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "480937139446",
+    "firebase_url": "https://prueba2-cf249-default-rtdb.firebaseio.com",
+    "project_id": "prueba2-cf249",
+    "storage_bucket": "prueba2-cf249.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480937139446:android:18948a63f60cbe760ba0d7",
+        "android_client_info": {
+          "package_name": "co.edu.ucundinamarca.primerproyecto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480937139446-4kiucn3u5u1tctiorjra5bhfq9jp5klc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9OERZN5TXSAjsnR-uepf9pEtv4fzrmYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480937139446-4kiucn3u5u1tctiorjra5bhfq9jp5klc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "480937139446-jgfevqgms2ou3gf9e8f4ea3dqs8ljm65.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pueba2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'View/Registro.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -69,6 +70,15 @@ class HomeStart extends State<Home> {
                     print('botón presionado');
                   },
                   child: Text('Enviar'),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+                child: TextButton(
+                  onPressed: () {
+Navigator.push(context, MaterialPageRoute(builder: (_) => Registro()));
+                  },
+                  child: Text('Registrar'),
                 ),
               )
             ],
