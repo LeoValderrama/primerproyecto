@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'DTO/User.dart';
 import 'View/Registro.dart';
 import 'firebase_options.dart';
 
@@ -24,7 +25,38 @@ class Home extends StatefulWidget {
   HomeStart createState() => HomeStart();
 }
 
+
+
+
 class HomeStart extends State<Home> {
+  TextEditingController correo=TextEditingController();
+  TextEditingController pass=TextEditingController();
+  User objUser=User();
+  validarDatos() async {
+    bool flag = false;
+    try {
+      CollectionReference ref = FirebaseFirestore.instance.collection("Usuarios");
+      QuerySnapshot usuario = await ref.get();
+      if (usuario.docs.length != 0) {
+        for (var cursor in usuario.docs) {
+          if (correo.text == cursor.get('CorreoUsuario')) {
+            if (pass .text == cursor.get('Password')) {
+print(cursor.get('NombreUsuario'));
+objUser.nombre=cursor.get('NombreUsuario');
+
+            }
+          }
+          //print(cursor.get('User'));
+        } //if (!flag)
+        // mensajeGeneral('Mensaje', 'dato no encontrado');
+
+      }
+    } catch (e) {
+      //mensajeGeneral('Error', e.toString());
+      print('**************ERROR***********************' + e.toString());
+    }
+  }
+
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bienvenidos',
@@ -46,16 +78,18 @@ class HomeStart extends State<Home> {
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+controller: correo,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
-                      labelText: 'Email Usuario',
-                      hintText: 'Digite email de usuario '),
+                      labelText: 'correo user',
+                      hintText: 'Digite user de usuario '),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
+                  controller: pass,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10)),
@@ -68,6 +102,7 @@ class HomeStart extends State<Home> {
                 child: ElevatedButton(
                   onPressed: () {
                     print('botón presionado');
+                    validarDatos();
                   },
                   child: Text('Enviar'),
                 ),
@@ -76,7 +111,7 @@ class HomeStart extends State<Home> {
                 padding: EdgeInsets.only(top: 20, left: 10, right: 10),
                 child: TextButton(
                   onPressed: () {
-Navigator.push(context, MaterialPageRoute(builder: (_) => Registro()));
+Navigator.push(context, MaterialPageRoute(builder: (_) => Registro(objUser)));
                   },
                   child: Text('Registrar'),
                 ),
