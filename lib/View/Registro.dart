@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,53 +14,75 @@ class Registro extends StatefulWidget {
 }
 
 class RegistroApp extends State<Registro> {
-  TextEditingController nombre =TextEditingController();
-  TextEditingController identidad=TextEditingController();
-  TextEditingController correo=TextEditingController();
-  TextEditingController telefono=TextEditingController();
-  TextEditingController pass =TextEditingController();
+  TextEditingController nombre = TextEditingController();
+  TextEditingController identidad = TextEditingController();
+  TextEditingController correo = TextEditingController();
+  TextEditingController telefono = TextEditingController();
+  TextEditingController pass = TextEditingController();
 
-  final firebase= FirebaseFirestore.instance;
+  final firebase = FirebaseFirestore.instance;
 
-  insertarDatos() async{
-    try{
+  insertarDatos() async {
+    try {
       await firebase.collection('Usuarios').doc().set({
-        "NombreUsuario":nombre.text,
-        "IndentidadUsuario":identidad.text,
-        "CorreoUsuario":correo.text,
-        "TelefonoUsuario":telefono.text,
-        "Password":pass.text
+        "NombreUsuario": nombre.text,
+        "IndentidadUsuario": identidad.text,
+        "CorreoUsuario": correo.text,
+        "TelefonoUsuario": telefono.text,
+        "Password": pass.text,
+        "Rol": 'Invitado',
+        "Estado": true
       });
       print('Envio Correcto');
+    //  mensaje('Información', 'Registro correto');
+
     }
-    catch(e){
-      print('Error en insert....... '+ e.toString());
+    catch (e) {
+      print('Error en insert....... ' + e.toString());
     }
   }
-
+ /* void mensaje(String titulo, String contenido) {
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text(titulo),
+            content: Text(contenido),
+            actions: <Widget>[
+              ElevatedButton(
+                onPressed: () {
+                  //Navigator.of(context).pop();
+                },
+                child:
+                Text("OK", style: TextStyle(color: Colors.blueGrey)),
+              )
+            ],
+          );
+        });
+  }*/
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registro de usuarios -->'+ widget.cadena.nombre),
-        backgroundColor: Colors.green ,
+        title: Text('Registro de usuarios -->' + widget.cadena.nombre),
+        backgroundColor: Colors.green,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
-            child: TextField(
-              controller: nombre,
-              decoration: InputDecoration(
-                labelText: 'Nombre'
-              ),
-              style: TextStyle(
-                color: Color(0xFF0097ff)
+            Padding(padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+              child: TextField(
+                controller: nombre,
+                decoration: InputDecoration(
+                    labelText: 'Nombre'
+                ),
+                style: TextStyle(
+                    color: Color(0xFF0097ff)
+                ),
               ),
             ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
+            Padding(padding: EdgeInsets.only(top: 20, left: 10, right: 10),
               child: TextField(
                 controller: identidad,
                 decoration: InputDecoration(
@@ -69,7 +93,7 @@ class RegistroApp extends State<Registro> {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
+            Padding(padding: EdgeInsets.only(top: 20, left: 10, right: 10),
               child: TextField(
                 controller: correo,
                 decoration: InputDecoration(
@@ -80,7 +104,7 @@ class RegistroApp extends State<Registro> {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
+            Padding(padding: EdgeInsets.only(top: 20, left: 10, right: 10),
               child: TextField(
                 controller: telefono,
                 decoration: InputDecoration(
@@ -91,7 +115,7 @@ class RegistroApp extends State<Registro> {
                 ),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 20,left: 10,right: 10),
+            Padding(padding: EdgeInsets.only(top: 20, left: 10, right: 10),
               child: TextField(
                 controller: pass,
                 decoration: InputDecoration(
@@ -113,7 +137,7 @@ class RegistroApp extends State<Registro> {
                 child: Text('Registrar'),
               ),
             ),
-         ],
+          ],
         ),
       ),
     );
